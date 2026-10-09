@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Academic Transcript</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<style>
+:root{--bg:#eef1f8;--ink:#141a2e;--mute:#5d6683;--glass:rgba(255,255,255,.62);--line:rgba(20,26,46,.12);--acc:#5b6cff;--acc2:#18b894;--track:rgba(20,26,46,.08);--gA:#14b88f;--gBp:#4f8cff;--gB:#7a6cff;--gC:#e8a23a;--gF:#ef5b6b;--gIP:#8b93ad;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1020;--ink:#eaeefc;--mute:#97a0c2;--glass:rgba(255,255,255,.06);--line:rgba(255,255,255,.12);--acc:#8a96ff;--acc2:#3fe0b5;--track:rgba(255,255,255,.1)}}
+:root[data-theme="dark"]{--bg:#0b1020;--ink:#eaeefc;--mute:#97a0c2;--glass:rgba(255,255,255,.06);--line:rgba(255,255,255,.12);--acc:#8a96ff;--acc2:#3fe0b5;--track:rgba(255,255,255,.1)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{margin:0;font-family:'IBM Plex Sans Arabic',system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden;transition:background .4s,color .4s}
+.blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:.5;z-index:0;pointer-events:none}.b1{width:420px;height:420px;background:var(--acc);top:-120px;right:-100px}.b2{width:380px;height:380px;background:var(--acc2);bottom:-140px;left:-100px;opacity:.28}
+main{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:20px 16px 70px}
+.glass{background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4)}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;gap:10px;flex-wrap:wrap}.tb{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font:inherit;color:var(--ink);cursor:pointer;border-radius:999px;padding:8px 16px;font-size:14px;transition:transform .25s,border-color .25s,background .25s}
+.btn:hover{transform:translateY(-2px);border-color:var(--acc)}.btn:active{transform:scale(.96)}.btn.pri{background:var(--acc);border-color:var(--acc);color:#fff}.btn.dan{color:var(--gF)}.btn.sm{padding:5px 12px;font-size:13px}
+button:focus-visible,.card:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.hero{border-radius:32px;padding:30px 26px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(360px circle at var(--mx,80%) var(--my,0%),color-mix(in srgb,var(--acc) 26%,transparent),transparent 70%);pointer-events:none}
+.hero-grid{display:grid;gap:26px;grid-template-columns:1fr;position:relative}@media(min-width:800px){.hero-grid{grid-template-columns:1.2fr 1fr;align-items:center}}
+.avatar{width:58px;height:58px;border-radius:18px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center;font-weight:700;font-size:22px;color:#fff;margin-bottom:16px}
+h1{font-size:clamp(26px,5vw,38px);margin:0 0 8px;font-weight:700;line-height:1.3;word-break:break-word}.sub{color:var(--mute);font-size:15px;line-height:1.9;margin:0}
+.gpa-row{display:flex;align-items:baseline;gap:10px;margin-top:22px}.gpa-n{font-size:clamp(54px,11vw,76px);font-weight:700;line-height:1;font-variant-numeric:tabular-nums;direction:ltr}.gpa-l{color:var(--mute);font-size:14px;line-height:1.6}
+.panel{border-radius:24px;padding:22px;background:var(--glass);border:1px solid var(--line);display:flex;gap:20px;align-items:center;justify-content:center;flex-wrap:wrap}
+.ring{position:relative;width:132px;height:132px;flex:none}.ring svg{transform:rotate(-90deg);display:block}
+.ring,.ring svg,.ring svg *,.ring .num{outline:none!important;border:0!important;-webkit-tap-highlight-color:transparent;user-select:none}
+.ring .num{position:absolute;inset:0;display:grid;place-items:center;font-size:25px;font-weight:700;font-variant-numeric:tabular-nums;direction:ltr}
+.stats{display:grid;gap:12px;font-size:13px;color:var(--mute)}.stats b{color:var(--ink);font-size:19px;margin-inline-end:6px;font-variant-numeric:tabular-nums}
+.bar{margin:34px 0 4px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;font-size:14px;color:var(--mute);background:transparent;border:1px solid var(--line);border-radius:999px;padding:7px 16px;cursor:pointer;transition:all .25s;direction:ltr}.chip:hover{color:var(--ink);border-color:var(--acc);transform:translateY(-2px)}.chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.sem{margin-top:30px}.sem-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px;flex-wrap:wrap}
+.sem-h h2{margin:0;font-size:20px;font-weight:600;display:flex;align-items:center;gap:10px;flex-wrap:wrap}.sem-h .s{font-size:13px;color:var(--mute)}.acts{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.pill{font-size:12px;font-weight:500;padding:4px 12px;border-radius:99px;color:var(--p);background:color-mix(in srgb,var(--p) 16%,transparent)}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.card{border-radius:22px;padding:18px;cursor:pointer;transition:transform .3s,border-color .3s,box-shadow .3s}.card:hover{transform:translateY(-6px) scale(1.015);border-color:var(--c);box-shadow:0 18px 40px -18px var(--c)}
+.card-t{display:flex;justify-content:space-between;gap:10px;align-items:center}.card h3{margin:0;font-size:19px;font-weight:600;direction:ltr;letter-spacing:.5px;text-align:start}.cn{font-size:12.5px;color:var(--mute);margin-top:3px;line-height:1.5}
+.badge{min-width:46px;text-align:center;font-weight:700;font-size:15px;padding:6px 10px;border-radius:12px;color:var(--c);background:color-mix(in srgb,var(--c) 16%,transparent);direction:ltr}
+.meta{display:flex;justify-content:space-between;font-size:13px;color:var(--mute);margin:16px 0 8px}
+.track{height:8px;border-radius:99px;background:var(--track);overflow:hidden}.fill{height:100%;border-radius:99px;background:var(--c)}
+.wait{background:repeating-linear-gradient(135deg,var(--track) 0 8px,transparent 8px 16px)}.wait-t{font-size:12px;color:var(--mute);margin-top:8px}
+.empty{text-align:center;color:var(--mute);padding:34px 0}.foot{text-align:center;margin-top:50px}
+.ov{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top)) 16px max(16px,env(safe-area-inset-bottom));background:rgba(4,7,18,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.md{--c:var(--acc);width:min(520px,100%);max-height:88vh;overflow:auto;border-radius:28px;padding:26px 22px;position:relative;box-shadow:0 30px 80px -20px rgba(0,0,0,.5)}.md.glass{background:color-mix(in srgb,var(--bg) 80%,transparent)}
+.x{position:absolute;top:14px;inset-inline-end:14px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--glass);color:var(--ink);cursor:pointer;font-size:15px;transition:transform .25s}.x:hover{transform:rotate(90deg)}
+.md h2{margin:4px 0 12px;font-size:21px;line-height:1.45;font-weight:700;padding-inline-end:44px}.mcode{direction:ltr;unicode-bidi:isolate;display:inline-block;font-size:13px;color:var(--mute)}
+.mm{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:8px 0;font-size:14px;color:var(--mute)}
+.row{margin-top:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line)}.row.tot{background:color-mix(in srgb,var(--c) 14%,transparent);border-color:var(--c)}
+.rt{display:flex;justify-content:space-between;font-size:14px;margin-bottom:8px}.rt b{direction:ltr}
+.warn{display:flex;gap:10px;margin-top:14px;padding:14px;border-radius:16px;background:color-mix(in srgb,var(--gIP) 16%,transparent);border:1px solid var(--gIP);font-size:14px;line-height:1.7}
+.f label{display:block;font-size:13px;color:var(--mute);margin:12px 0 5px}
+.in{width:100%;box-sizing:border-box;font:inherit;font-size:16px;color:var(--ink);background:var(--track);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.in:focus{outline:2px solid var(--acc);border-color:transparent}select.in option{color:#141a2e}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pr{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:8px;align-items:center;margin-top:8px;font-size:13px}.pr .in{padding:8px}
+.btns{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}.btns .btn{flex:1;text-align:center}.err{color:var(--gF);font-size:13px;margin-top:10px;min-height:18px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div>
+<main>
+  <div class="topbar"><strong id="ttl" style="font-size:15px;color:var(--mute)"></strong>
+    <div class="tb"><button class="btn glass" id="ed"></button><button class="btn glass" id="lang"></button><button class="btn glass" id="theme"></button></div></div>
+  <section class="hero glass" id="hero"><div class="hero-grid">
+    <div class="hero-txt"><div class="avatar" id="av"></div><h1 id="name"></h1><p class="sub" id="info"></p>
+      <div class="gpa-row"><div class="gpa-n" id="gpa">0.00</div><div class="gpa-l" id="gl"></div></div></div>
+    <div class="panel hero-txt"><div class="ring"><svg width="132" height="132" viewBox="0 0 132 132"><circle cx="66" cy="66" r="58" fill="none" stroke="var(--track)" stroke-width="9"/><circle id="arc" cx="66" cy="66" r="58" fill="none" stroke="url(#g)" stroke-width="9" stroke-linecap="round" stroke-dasharray="364.4" stroke-dashoffset="364.4"/><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b6cff"/><stop offset="1" stop-color="#18b894"/></linearGradient></defs></svg><div class="num" id="pct">0%</div></div>
+      <div class="stats"><div><b id="done">0</b><span id="t_done"></span></div><div><b id="left">0</b><span id="t_left"></span></div><div style="color:var(--mute)"><span id="t_pct"></span> <span id="pct2"></span></div></div></div>
+  </div></section>
+  <div class="bar"><div class="chips" id="chips"></div><button class="btn glass pri" id="addT"></button></div>
+  <div id="list"></div>
+  <div class="foot"><button class="btn glass dan sm" id="rst"></button></div>
+</main>
+<div id="ov" class="ov" aria-hidden="true"><div id="md" class="md glass" role="dialog" aria-modal="true" data-lenis-prevent><button id="x" class="x" type="button">✕</button><div id="mb"></div></div></div>
+
+<script>
+const T={
+ar:{title:"السجل الأكاديمي",edit:"✏️ تعديل السجل",dark:"الوضع الداكن",light:"الوضع الفاتح",langBtn:"English",of:s=>"من "+s,gl:"المعدل التراكمي",tDone:"ساعة مكتملة",tLeft:"ساعة متبقية",tPct:"نسبة إتمام الخطة",pof:n=>"(من "+n+" ساعة)",all:"الكل",ip:"قيد الدراسة",hrs:"ساعات",semGpa:"معدل الفصل",pDone:"مكتمل",pIp:"قيد الدراسة",pMix:"جزئي",pEmpty:"فارغ",wait:"بانتظار الدرجة النهائية",warn:"المقرر قيد الدراسة حالياً - لم يتم رصد درجات الاختبارات بعد",p:{att:"الحضور والمشاركة",tma:"الواجب (TMA)",mid:"الاختبار النصفي",fin:"الاختبار النهائي",tot:"المجموع النهائي"},addT:"+ إضافة فصل",addC:"+ مادة",term:"الفصل",save:"حفظ",cancel:"إلغاء",del:"حذف",ed2:"تعديل",ren:"✎",noC:"لا توجد مواد في هذا الفصل بعد.",noF:"لا توجد مواد لهذا الفلتر.",noT:"لا توجد فصول. أضف فصلاً دراسياً للبدء.",
+name:"الاسم",major:"التخصص",college:"الكلية",scale:"سلم المعدل",plan:"إجمالي ساعات الخطة",phN:"اسم الطالب",phM:"التخصص",phC:"الكلية",profile:"تعديل البيانات",termName:"اسم الفصل (اختياري)",termT:"فصل دراسي",
+code:"رمز المادة",nAr:"الاسم بالعربية",nEn:"الاسم بالإنجليزية (اختياري)",cr:"الساعات المعتمدة",status:"الحالة",stDone:"مكتملة",stIp:"قيد الدراسة / In Progress",parts:"الدرجات الجزئية (المحصّل / الأعلى)",total:"المجموع النهائي من 100",grade:"التقدير النهائي",auto:"تلقائي من المجموع",newC:"مادة جديدة",editC:"تعديل المادة",
+eReq:"أدخل الرمز والاسم وعدد ساعات صحيح.",eGr:"أدخل المجموع أو اختر التقدير.",rst:"إعادة الضبط / مسح البيانات",rstQ:"ماذا تريد أن تفعل بالبيانات المحفوظة؟",sample:"بيانات تجريبية",clear:"مسح الكل",delQ:"هل أنت متأكد من الحذف؟ لا يمكن التراجع.",delT:"سيُحذف الفصل بكل مواده."},
+en:{title:"Academic Transcript",edit:"✏️ Edit record",dark:"Dark mode",light:"Light mode",langBtn:"العربية",of:s=>"out of "+s,gl:"Cumulative GPA",tDone:"credit hours completed",tLeft:"credit hours remaining",tPct:"Plan completion",pof:n=>"(of "+n+" hours)",all:"All",ip:"In Progress",hrs:"hours",semGpa:"Term GPA",pDone:"Completed",pIp:"In Progress",pMix:"Partial",pEmpty:"Empty",wait:"Awaiting final grade",warn:"This course is currently in progress - exam grades have not been recorded yet",p:{att:"Attendance & Participation",tma:"Assignment (TMA)",mid:"Midterm Exam",fin:"Final Exam",tot:"Final Total"},addT:"+ Add term",addC:"+ Course",term:"Term",save:"Save",cancel:"Cancel",del:"Delete",ed2:"Edit",ren:"✎",noC:"No courses in this term yet.",noF:"No courses match this filter.",noT:"No terms yet. Add a term to get started.",
+name:"Name",major:"Major",college:"College",scale:"GPA scale",plan:"Total plan credit hours",phN:"Student Name",phM:"Major",phC:"College",profile:"Edit profile",termName:"Term name (optional)",termT:"Term",
+code:"Course code",nAr:"Name in Arabic",nEn:"Name in English (optional)",cr:"Credit hours",status:"Status",stDone:"Completed",stIp:"In Progress",parts:"Partial grades (earned / max)",total:"Final total out of 100",grade:"Final grade",auto:"Auto from total",newC:"New course",editC:"Edit course",
+eReq:"Enter a code, a name and valid credit hours.",eGr:"Enter the total or pick a grade.",rst:"Reset / Clear data",rstQ:"What do you want to do with the saved data?",sample:"Sample data",clear:"Clear all",delQ:"Are you sure? This cannot be undone.",delT:"The term and all its courses will be deleted."}};
+const SC={4:[["A",90,4],["B+",80,3.5],["B",70,3],["C+",65,2.5],["C",60,2],["D+",55,1.5],["D",50,1],["F",0,0]],5:[["A",90,5],["B+",80,4.5],["B",70,4],["C+",65,3.5],["C",60,3],["D+",55,2.5],["D",50,2],["F",0,0]]};
+const MAX={att:10,tma:10,mid:30,fin:50},KEYS=["att","tma","mid","fin"],KEY="gpa-tracker-v1";
+const $=id=>document.getElementById(id),uid=()=>Math.random().toString(36).slice(2,9);
+const esc=s=>String(s??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+const D=(code,ar,en,cr,parts)=>{const total=Object.values(parts).reduce((a,p)=>a+p[0],0);return{id:uid(),code,ar,en,cr,status:"done",parts,total,grade:null}};
+const IP=(code,ar,en,cr)=>({id:uid(),code,ar,en,cr,status:"ip"});
+function sample(){const s={profile:{name:"",major:"",college:"",scale:4,plan:131},terms:[
+{id:uid(),name:"",courses:[
+D("GR101","مهارات التعلم الذاتي","Self-Learning Skills",3,{tma:[18,20],mid:[28,30],fin:[44,50]}),
+D("EL111","مهارات الاتصال في اللغة الإنجليزية 1","English Communication Skills 1",3,{att:[9.75,10],tma:[9,10],mid:[28,30],fin:[41,50]}),
+D("AR111","مهارات الاتصال في اللغة العربية 1","Arabic Communication Skills 1",3,{att:[10,10],tma:[10,10],mid:[25,30],fin:[38,50]}),
+D("TU170","أساسيات الحوسبة","Computing Fundamentals",3,{att:[10,10],tma:[10,10],mid:[22,30],fin:[41,50]}),
+D("MT129","حساب التفاضل والتكامل والاحتمال","Calculus and Probability",4,{att:[10,10],tma:[10,10],mid:[17,30],fin:[41,50]})]},
+{id:uid(),name:"",courses:[IP("AR112","مهارات الاتصال في اللغة العربية 2","Arabic Communication Skills 2",3),IP("EL112","مهارات الاتصال في اللغة الإنجليزية 2","English Communication Skills 2",3),IP("GR111","الدراسات الإسلامية","Islamic Studies",3),IP("MT131","الرياضيات المنفصلة","Discrete Mathematics",4),IP("TM105","مقدمة في البرمجة","Introduction to Programming",4)]}],theme:"",lang:"ar"};
+s.terms[0].courses.forEach(c=>c.grade=gradeOf(c.total,4));return s}
+const gradeOf=(tot,sc)=>SC[sc].find(r=>tot>=r[1])[0];
+function load(){try{const j=localStorage.getItem(KEY);if(j){const s=JSON.parse(j);if(s&&s.terms&&s.profile){s.profile.scale=4;return s}}}catch(e){}return sample()}
+let S=load(),lang=S.lang||"ar",filter="all",lenis=null,curM=null,lastF=null,prev={g:0,p:0},first=true;
+const save=()=>{S.lang=lang;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const t=k=>T[lang][k],nm=c=>lang=="ar"?(c.ar||c.en):(c.en||c.ar),tn=(tm,i)=>tm.name||t("term")+" "+(i+1);
+const gp=c=>{const r=SC[S.profile.scale].find(r=>r[0]==c.grade);return r?r[2]:0};
+const gcol=c=>{const r=gp(c)/S.profile.scale;return r>=.95?"--gA":r>=.85?"--gBp":r>=.7?"--gB":r>=.4?"--gC":"--gF"};
+function calc(){let pts=0,h=0;S.terms.forEach(tm=>tm.courses.forEach(c=>{if(c.status=="done"){h+=c.cr;pts+=c.cr*gp(c)}}));const pl=S.profile.plan;return{gpa:h?pts/h:0,h,left:Math.max(pl-h,0),pct:pl?Math.min(h/pl*100,100):0}}
+function termGpa(tm){let p=0,h=0;tm.courses.forEach(c=>{if(c.status=="done"){h+=c.cr;p+=c.cr*gp(c)}});return h?p/h:null}
+gsap.registerPlugin(ScrollTrigger);
+
+/* ===== الواجهة العامة ===== */
+function statics(){const P=S.profile,n=P.name||t("phN");$("name").textContent=n;$("av").textContent=n.trim()[0]||"?";
+ $("info").innerHTML=esc(P.major||t("phM"))+"<br>"+esc(P.college||t("phC"));
+ $("ttl").textContent=t("title");$("gl").innerHTML=t("of")(P.scale.toFixed(2))+"<br>"+t("gl");
+ $("t_done").textContent=t("tDone");$("t_left").textContent=t("tLeft");$("t_pct").textContent=t("tPct");$("pct2").textContent=t("pof")(P.plan);
+ $("ed").textContent=t("edit");$("lang").textContent=t("langBtn");$("addT").textContent=t("addT");$("rst").textContent=t("rst");$("x").setAttribute("aria-label","Close");
+ document.documentElement.lang=lang;document.documentElement.dir=lang=="ar"?"rtl":"ltr";document.title=t("title");lbl()}
+const root=document.documentElement,dm=matchMedia("(prefers-color-scheme:dark)");
+if(S.theme)root.dataset.theme=S.theme;
+const isDark=()=>root.dataset.theme?root.dataset.theme=="dark":dm.matches;
+function lbl(){$("theme").textContent=isDark()?t("light"):t("dark")}
+function hero(R){const C=364.4,off=C*(1-R.pct/100);$("done").textContent=R.h;$("left").textContent=R.left;
+ const set=(g,p)=>{$("gpa").textContent=g.toFixed(2);$("pct").textContent=p.toFixed(2)+"%"};
+ if(reduce){set(R.gpa,R.pct);$("arc").style.strokeDashoffset=off;prev={g:R.gpa,p:R.pct};return}
+ const o={...prev};gsap.killTweensOf(o);gsap.to(o,{g:R.gpa,p:R.pct,duration:first?2.2:.9,delay:first?.5:0,ease:"power2.out",onUpdate:()=>set(o.g,o.p),onComplete:()=>set(R.gpa,R.pct)});
+ gsap.to("#arc",{strokeDashoffset:off,duration:first?2.2:.9,delay:first?.5:0,ease:"power2.out"});prev={g:R.gpa,p:R.pct}}
+function card(c,tid){const ip=c.status=="ip",col=ip?"--gIP":gcol(c);
+ return `<article class="card glass" data-t="${tid}" data-id="${c.id}" tabindex="0" role="button" style="--c:var(${col})"><div class="card-t"><div><h3>${esc(c.code)}</h3><div class="cn">${esc(nm(c))}</div></div><div class="badge">${ip?t("ip"):esc(c.grade)}</div></div><div class="meta"><span>${c.cr} ${t("hrs")}</span><span>${ip?"In Progress":(c.total!=null?c.total+" / 100":"")}</span></div>${ip?`<div class="track wait"></div><div class="wait-t">${t("wait")}</div>`:`<div class="track"><div class="fill" data-w="${Math.min(c.total??gp(c)/S.profile.scale*100,100)}" style="width:${Math.min(c.total??gp(c)/S.profile.scale*100,100)}%"></div></div>`}</article>`}
+function render(anim){
+ ScrollTrigger.getAll().forEach(s=>s.kill());const R=calc();statics();hero(R);
+ const gr=[...new Set(S.terms.flatMap(tm=>tm.courses.filter(c=>c.status=="done").map(c=>c.grade)))].sort((a,b)=>(SC[S.profile.scale].find(r=>r[0]==b)?.[2]||0)-(SC[S.profile.scale].find(r=>r[0]==a)?.[2]||0));
+ const fl=["all",...gr,"ip"];if(!fl.includes(filter))filter="all";
+ $("chips").innerHTML=fl.map(f=>`<button class="chip ${f==filter?"on":""}" data-f="${esc(f)}">${f=="all"?t("all"):f=="ip"?t("ip"):esc(f)}</button>`).join("");
+ let h="";
+ S.terms.forEach((tm,i)=>{const l=tm.courses.filter(c=>filter=="all"||(filter=="ip"?c.status=="ip":c.status=="done"&&c.grade==filter));
+  if(!l.length&&filter!="all")return;
+  const n=tm.courses.length,d=tm.courses.filter(c=>c.status=="done").length,st=!n?["pEmpty","--gIP"]:d==n?["pDone","--gA"]:d==0?["pIp","--gIP"]:["pMix","--gC"];
+  const hr=tm.courses.reduce((a,c)=>a+c.cr,0),g=termGpa(tm);
+  h+=`<section class="sem"><div class="sem-h"><h2>${esc(tn(tm,i))}<span class="pill" style="--p:var(${st[1]})">${t(st[0])}</span></h2><div class="acts"><span class="s">${hr} ${t("hrs")}${g!=null?" ، "+t("semGpa")+" "+g.toFixed(2):""}</span><button class="btn glass sm" data-a="addC" data-t="${tm.id}">${t("addC")}</button><button class="btn glass sm" data-a="renT" data-t="${tm.id}" aria-label="${t("ed2")}">${t("ren")}</button><button class="btn glass sm dan" data-a="delT" data-t="${tm.id}" aria-label="${t("del")}">🗑</button></div></div>${l.length?`<div class="grid">${l.map(c=>card(c,tm.id)).join("")}</div>`:`<div class="empty">${t("noC")}</div>`}</section>`});
+ $("list").innerHTML=h||`<div class="empty">${S.terms.length?t("noF"):t("noT")}</div>`;
+ if(reduce)return;
+ document.querySelectorAll(".sem").forEach(sec=>{const cs=sec.querySelectorAll(".card"),fs=sec.querySelectorAll(".fill");
+  if(anim)gsap.from(cs,{y:22,opacity:0,duration:.5,stagger:.06,ease:"power3.out",clearProps:"transform,opacity"});
+  if(fs.length)gsap.fromTo(fs,{width:"0%"},{width:(i,el)=>el.dataset.w+"%",duration:1.2,stagger:.1,ease:"power3.out",scrollTrigger:{trigger:sec,start:"top 90%",once:true}})});
+ ScrollTrigger.refresh()}
+
+/* ===== النافذة المنبثقة ===== */
+function showM(html,col){const ov=$("ov"),md=$("md");md.style.setProperty("--c",col||"var(--acc)");$("mb").innerHTML=html;
+ if(curM){if(!reduce)gsap.from("#mb > *",{y:12,opacity:0,duration:.35,stagger:.04,clearProps:"transform,opacity"});return}
+ curM=true;ov.style.display="flex";ov.setAttribute("aria-hidden","false");if(lenis)lenis.stop();$("x").focus({preventScroll:true});
+ if(reduce)return;gsap.killTweensOf([ov,md]);
+ gsap.fromTo(ov,{opacity:0},{opacity:1,duration:.25});gsap.fromTo(md,{opacity:0,scale:.9,y:26},{opacity:1,scale:1,y:0,duration:.5,ease:"power3.out"});
+ gsap.from("#mb > *",{y:14,opacity:0,duration:.45,stagger:.05,delay:.12,clearProps:"transform,opacity"});
+ gsap.fromTo("#mb .fill",{width:"0%"},{width:(i,el)=>el.dataset.w+"%",duration:1,stagger:.08,delay:.3,ease:"power3.out"})}
+function closeM(){if(!curM)return;curM=null;const ov=$("ov"),md=$("md");
+ const end=()=>{ov.style.display="none";ov.setAttribute("aria-hidden","true");if(lenis)lenis.start();if(lastF&&document.contains(lastF))lastF.focus({preventScroll:true})};
+ if(reduce)return end();gsap.killTweensOf([ov,md]);gsap.to(md,{opacity:0,scale:.94,y:16,duration:.25,ease:"power2.in"});gsap.to(ov,{opacity:0,duration:.28,onComplete:end})}
+const fld=(l,i)=>`<label>${l}</label>${i}`,inp=(id,v,ty="text",x="")=>`<input class="in" id="${id}" type="${ty}" value="${esc(v??"")}" ${x}>`;
+const btns=(ok,extra="")=>`<div class="err" id="err"></div><div class="btns"><button class="btn glass" id="cn">${t("cancel")}</button>${extra}<button class="btn glass pri" id="ok">${t(ok)}</button></div>`;
+const find=(tid,id)=>{const tm=S.terms.find(x=>x.id==tid);return[tm,tm&&tm.courses.find(c=>c.id==id)]};
+function confirmM(msg,fn){showM(`<h2>${t("del")}</h2><p class="sub">${msg}</p>${btns("del")}`,"var(--gF)");$("cn").onclick=closeM;$("ok").onclick=()=>{fn();closeM()}}
+function viewC(tid,id){const[tm,c]=find(tid,id),ip=c.status=="ip",col=ip?"--gIP":gcol(c);
+ let h=`<span class="mcode">${esc(c.code)}</span><h2>${esc(nm(c))}</h2><div class="mm"><span>${c.cr} ${t("hrs")}</span><span class="badge" style="--c:var(${col})">${ip?t("ip"):esc(c.grade)}</span></div>`;
+ if(ip)h+=`<div class="warn"><b>⚠</b><span>${t("warn")}</span></div><div class="track wait" style="margin-top:16px"></div>`;
+ else{KEYS.forEach(k=>{const p=c.parts&&c.parts[k];if(p){const w=p[0]/p[1]*100;h+=`<div class="row"><div class="rt"><span>${t("p")[k]}</span><b>${p[0]} / ${p[1]}</b></div><div class="track"><div class="fill" data-w="${w}" style="width:${w}%"></div></div></div>`}});
+  if(c.total!=null)h+=`<div class="row tot"><div class="rt"><span>${t("p").tot}</span><b>${c.total} / 100</b></div><div class="track"><div class="fill" data-w="${Math.min(c.total,100)}" style="width:${Math.min(c.total,100)}%"></div></div></div>`}
+ h+=`<div class="btns"><button class="btn glass dan" id="dl">${t("del")}</button><button class="btn glass pri" id="ee">${t("ed2")}</button></div>`;
+ showM(h,`var(${col})`);$("ee").onclick=()=>formC(tid,id);
+ $("dl").onclick=()=>confirmM(t("delQ"),()=>{tm.courses=tm.courses.filter(x=>x.id!=id);save();render(true)})}
+function formC(tid,id){const[tm,c0]=find(tid,id),c=c0||{status:"ip",cr:3},P=c.parts||{},sc=S.profile.scale;
+ let h=`<h2>${t(c0?"editC":"newC")}</h2><div class="f">${fld(t("code"),inp("fc",c.code,"text",'dir="ltr"'))}${fld(t("nAr"),inp("fa",c.ar))}${fld(t("nEn"),inp("fe",c.en,"text",'dir="ltr"'))}
+ <div class="two"><div>${fld(t("cr"),inp("fh",c.cr,"number",'min="1" step="any" inputmode="decimal"'))}</div><div>${fld(t("status"),`<select class="in" id="fs"><option value="ip" ${c.status=="ip"?"selected":""}>${t("stIp")}</option><option value="done" ${c.status=="done"?"selected":""}>${t("stDone")}</option></select>`)}</div></div>
+ <div id="dn" style="display:${c.status=="done"?"block":"none"}"><label>${t("parts")}</label>${KEYS.map(k=>`<div class="pr"><span>${t("p")[k]}</span>${inp("g_"+k,P[k]?P[k][0]:"","number",'step="any" inputmode="decimal" placeholder="0"')}${inp("m_"+k,P[k]?P[k][1]:MAX[k],"number",'step="any" inputmode="decimal"')}</div>`).join("")}
+ <div class="two"><div>${fld(t("total"),inp("tot",c.total,"number",'step="any" inputmode="decimal"'))}</div><div>${fld(t("grade"),`<select class="in" id="gr"><option value="">${t("auto")}</option>${SC[sc].map(r=>`<option ${c.grade==r[0]&&c.total==null?"selected":""}>${r[0]}</option>`).join("")}</select>`)}</div></div></div></div>${btns("save")}`;
+ showM(h);$("fs").onchange=e=>{$("dn").style.display=e.target.value=="done"?"block":"none"};$("cn").onclick=closeM;
+ $("ok").onclick=()=>{const v=i=>$(i).value.trim(),cr=parseFloat(v("fh")),st=$("fs").value;
+  if(!v("fc")||!(cr>0)||!(v("fa")||v("fe")))return $("err").textContent=t("eReq");
+  const o={id:c0?c0.id:uid(),code:v("fc"),ar:v("fa"),en:v("fe"),cr,status:st};
+  if(st=="done"){const parts={};let sum=0,any=false;KEYS.forEach(k=>{if(v("g_"+k)!==""){const g=parseFloat(v("g_"+k)),m=parseFloat(v("m_"+k))||MAX[k];parts[k]=[g,m];sum+=g;any=true}});
+   let total=v("tot")!==""?parseFloat(v("tot")):any?sum:null;const grade=v("gr")||(total!=null?gradeOf(total,sc):null);
+   if(!grade)return $("err").textContent=t("eGr");o.parts=any?parts:null;o.total=total;o.grade=grade}
+  if(c0)Object.assign(c0,o);else tm.courses.push(o);if(c0&&st=="ip"){delete c0.parts;delete c0.total;delete c0.grade}
+  save();closeM();render(true)}}
+function formT(tid){const tm=S.terms.find(x=>x.id==tid);
+ showM(`<h2>${t("termT")}</h2><div class="f">${fld(t("termName"),inp("tn",tm?tm.name:""))}</div>${btns("save")}`);$("cn").onclick=closeM;
+ $("ok").onclick=()=>{const n=$("tn").value.trim();if(tm)tm.name=n;else S.terms.push({id:uid(),name:n,courses:[]});save();closeM();render(true)}}
+function formP(){const P=S.profile;
+ showM(`<h2>${t("profile")}</h2><div class="f">${fld(t("name"),inp("pn",P.name))}${fld(t("major"),inp("pm",P.major))}${fld(t("college"),inp("pc",P.college))}
+ ${fld(t("plan"),inp("pp",P.plan,"number",'min="1" inputmode="numeric"'))}</div>${btns("save")}`);$("cn").onclick=closeM;
+ $("ok").onclick=()=>{const pl=parseFloat($("pp").value);if(!(pl>0))return $("err").textContent=t("eReq");
+  const ns=4;if(ns!=P.scale){S.terms.forEach(tm=>tm.courses.forEach(c=>{if(c.status=="done"&&c.total!=null&&!c.parts&&0)c.grade=gradeOf(c.total,ns)}))}
+  Object.assign(P,{name:$("pn").value.trim(),major:$("pm").value.trim(),college:$("pc").value.trim(),scale:ns,plan:pl});save();closeM();render(false)}}
+function resetM(){showM(`<h2>${t("rst")}</h2><p class="sub">${t("rstQ")}</p><div class="btns"><button class="btn glass" id="cn">${t("cancel")}</button><button class="btn glass" id="sm">${t("sample")}</button><button class="btn glass dan" id="cl">${t("clear")}</button></div>`,"var(--gF)");
+ $("cn").onclick=closeM;$("sm").onclick=()=>{const l=lang,th=S.theme;S=sample();S.lang=l;S.theme=th;save();closeM();render(true)};
+ $("cl").onclick=()=>{S.terms=[];S.profile={name:"",major:"",college:"",scale:S.profile.scale,plan:S.profile.plan};save();closeM();render(true)}}
+
+/* ===== الأحداث ===== */
+$("list").onclick=e=>{const b=e.target.closest("[data-a]"),c=e.target.closest(".card");
+ if(b){lastF=b;const a=b.dataset.a,tid=b.dataset.t;if(a=="addC")formC(tid);else if(a=="renT")formT(tid);else confirmM(t("delT"),()=>{S.terms=S.terms.filter(x=>x.id!=tid);save();render(true)});return}
+ if(c){lastF=c;viewC(c.dataset.t,c.dataset.id)}};
+$("list").onkeydown=e=>{if(e.key!="Enter"&&e.key!=" ")return;const c=e.target.closest(".card");if(c){e.preventDefault();lastF=c;viewC(c.dataset.t,c.dataset.id)}};
+$("chips").onclick=e=>{const b=e.target.closest(".chip");if(b){filter=b.dataset.f;render(true)}};
+$("addT").onclick=e=>{lastF=e.currentTarget;formT()};$("ed").onclick=e=>{lastF=e.currentTarget;formP()};$("rst").onclick=e=>{lastF=e.currentTarget;resetM()};
+$("theme").onclick=()=>{root.dataset.theme=isDark()?"light":"dark";S.theme=root.dataset.theme;save();lbl()};
+$("lang").onclick=()=>{lang=lang=="ar"?"en":"ar";save();closeM();render(true)};
+$("ov").onclick=e=>{if(e.target==$("ov"))closeM()};$("x").onclick=closeM;
+document.addEventListener("keydown",e=>{if(e.key=="Escape")closeM()});
+$("hero").addEventListener("pointermove",e=>{const r=e.currentTarget.getBoundingClientRect();e.currentTarget.style.setProperty("--mx",(e.clientX-r.left)+"px");e.currentTarget.style.setProperty("--my",(e.clientY-r.top)+"px")});
+if(window.Lenis){lenis=new Lenis({lerp:.075,smoothWheel:true});lenis.on("scroll",ScrollTrigger.update);gsap.ticker.add(tm=>lenis.raf(tm*1000));gsap.ticker.lagSmoothing(0)}
+
+/* ===== تشغيل ===== */
+render(false);
+if(!reduce)gsap.timeline({defaults:{ease:"power3.out"}}).from(".topbar",{y:-20,opacity:0,duration:.6}).from(".hero",{y:40,opacity:0,scale:.97,duration:.9},"-=.3").from(".hero-txt > *",{y:22,opacity:0,duration:.7,stagger:.1},"-=.5").from(".bar",{y:16,opacity:0,duration:.5},"-=.3");
+first=false;
+</script>
+</body>
+</html>
